@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Usuarios</title>
+   <link rel="stylesheet" href="{{ url_for('static', filename='tabla.css' ) }}">
+</head>
+
+<!doctype html>
+<body>
+           <h1>Tabla de usuarios</h1>
+             <div class="tbl-header">
+               <table cellpadding="0" cellspacing="0" border="0">
+
+               </table>
+             </div>
+           <div class="tbl-content">
+               <table cellpadding="0" cellspacing="0" border="0">
+                 <tbody>
+                 {% for row in rows %}
+                    <tr>
+                        <td>{{row["id"]}}</td>
+                       <td>{{row["usuario"]}}</td>
+                       <td>{{row["contrasena"]}}</td>
+                       <td> {{ row["ip"]}}</td>
+                        <td>
+                            <form action="/admin/list/{{row['id']}}" >
+                                <button class="custom-btn btn-14" type="submit">Eliminar</button>
+                            </form>
+                        </td>
+                    </tr>
+                 {% endfor %}
+
+                 </tbody>
+               </table>
+
+           </div>
+           <h1>Ver Ubicasion</h1>
+            <div class="boton">
+                <button class="custom-btn btn-4" onclick="abrirModale()"><span>Ubicasión</span></button>
+            </div>
+
+            <div id="modale" class="modale" aria-hidden="true">
+              <div class="modal-dialog">
+                  <a class="btn-close" href="#" onclick="cerrarModale()" type="text"><b>x</b></a>
+                  <h2>Ubicasión</h2>
+                    <form class="form" action = "{{ url_for('geo') }}" method = "POST">
+                        <div class="modal-body">
+                          <input type="text" name="ip" placeholder="Ip" size="20" /><br>
+                        <div class="modal-footer">
+                      <span class="button-box">
+                              <button class="btn">Enviar</button>
+
+                      </span>
+                    </form>
+              </div>
+           </div>
+
+    </body>
+<script>
+    function abrirModale(){
+      htmlModale = document.getElementById("modale");
+      htmlModale.setAttribute("class", "modale opened");
+    }
+    function cerrarModale(){
+      htmlModale = document.getElementById("modale");
+      htmlModale.setAttribute("class", "modale");
+    }
+</script>
+</html>

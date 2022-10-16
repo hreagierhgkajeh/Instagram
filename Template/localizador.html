@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ubicasion</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='localizar.css' ) }}">
+</head>
+<body>
+<div>
+    Pais: {{data.country}}<br>
+    Longitud: {{data.lon}}<br>
+    Latitud: {{data.lat}}<br>
+    Continente: {{data.continent}}<br>
+    Nombe de la región: {{data.regionName}} <br>
+    Ciudad: {{data.city}}<br>
+    Distrito: {{data.district}}<br>
+    Zona horaria: {{data.timezone}}<br>
+    Moneda: {{data.currency}}<br>
+    Nombre de la compañia: {{data.asname}}<br>
+    Mobil: {{data.mobile}}<br>
+    Direccion Ip: {{data.query}}<br>
+    <a href="https://www.google.com/maps">Copia las coordenadas en Google Maps</a><br>
+
+</div>
+
+
+</body>
+</html>

